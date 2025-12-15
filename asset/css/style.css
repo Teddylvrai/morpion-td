@@ -1,0 +1,94 @@
+HTML,body{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #010440;
+    color: white;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.board{
+    width: 610px;
+    height: 610px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.cell{
+    border: 1px solid black;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
+    font-size: 60px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    background-color: #020873;
+}
+
+#container{
+    text-align: center;
+}
+
+button{
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 44px;
+    border: 2px solid white;
+    background-color: #05F2DB;
+}
+
+
+
+HTML,body.couleur2{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #723BBF;
+    color: white;
+}
+
+body.couleur2 .board{
+    width: 610px;
+    height: 610px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+body.couleur2 .cell{
+    border: 1px solid black;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
+    font-size: 60px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    background-color: #C2A0F2;
+}
+
+body .couleur2 #container{
+    text-align: center;
+}
+
+body .couleur2 button{
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 44px;
+    border: 2px solid white;
+    background-color: #6E3DD9;
+}
