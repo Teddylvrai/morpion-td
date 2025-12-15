@@ -1,41 +1,69 @@
 console.log("Initialisation ...");
 
 const container = document.getElementById("container")
-
-/*container.onclick = function(){
-    alert("clique pas sa marche pas !")
-    console.log("arrete d'appuyer");
-}*/
-
 const cells = document.querySelectorAll(".cell")
+const reset = document.getElementById("reset") // Déplacé ici pour regrouper les sélecteurs
+
+// --- NOUVEAU : Récupération des éléments HTML pour le score et le tour ---
+const currentPlayerSpan = document.getElementById("currentPlayer");
+const scoreXSpan = document.getElementById("scoreX");
+const scoreOSpan = document.getElementById("scoreO");
 
 let board = Array(9).fill("")
-
 let gameIsPlayable = true
-
 let player = "✖️"
+
+// --- NOUVEAU : Variables pour les scores ---
+let scoreX = 0;
+let scoreO = 0;
 
 function handleClick(event){
     const index = event.target.dataset.index
+    
+    // Si la case est prise ou le jeu fini, on arrête
     if(board[index] !== "" || !gameIsPlayable) return
+    
+    // Marquer la case
     board[index] = player
     event.target.textContent = player
 
-
-
+    // Vérification victoire
     if (checkForWin()){
+        // --- NOUVEAU : Mise à jour du score avant d'afficher le résultat ---
+        updateScore(player);
         showResult(`Le joueur ${player} a gagné !`)
-    }else if(!board.includes("")){
+    } 
+    else if(!board.includes("")){
         showResult("Match nul !")
+    } else {
+        // Changement de joueur (seulement si la partie n'est pas finie)
+        player = player === "✖️" ? "⭕" : "✖️"
+        
+        // --- NOUVEAU : Afficher qui doit jouer ---
+        currentPlayerSpan.textContent = player; 
     }
+}
 
-    player = player === "✖️" ? "⭕" : "✖️"
+// --- NOUVEAU : Fonction pour mettre à jour les scores ---
+function updateScore(winner) {
+    if (winner === "✖️") {
+        scoreX++;
+        scoreXSpan.textContent = scoreX;
+    } else {
+        scoreO++;
+        scoreOSpan.textContent = scoreO;
+    }
 }
 
 function showResult(message){
-    alert(message)
+    // Petit délai pour laisser le navigateur afficher le dernier symbole avant l'alerte
+    setTimeout(() => {
+        alert(message)
+    }, 10)
+    
     gameIsPlayable = false
     container.onclick = function fini(){
+        // Empêche les clics résiduels
     } 
 }
 
@@ -51,8 +79,9 @@ function checkForWin(){
         [2, 4, 6]
     ];
 
-    return winConditions.some(winConditions => {
-        const [a, b, c] = winConditions
+    return winConditions.some(combination => {
+        const [a, b, c] = combination
+        // Vérifie si a, b et c sont identiques et non vides
         return board[a] && board[a] === board[b] && board[a] === board[c]
     })
 }
@@ -64,26 +93,29 @@ function initGame(){
 console.log("100%");
 console.log("Initialisation terminée la partie peut commencer");
 
-const reset = document.getElementById("reset")
-
+// Reset du jeu
 reset.addEventListener("click", function resetGame(){
     board = Array(9).fill("")
     gameIsPlayable = true
     player = "✖️"
+    
+    // --- NOUVEAU : Remettre l'affichage du joueur à jour ---
+    currentPlayerSpan.textContent = player; 
+    
     cells.forEach(cell => cell.textContent = "")
+    
+    // Nettoyage de l'événement onclick bloquant du container s'il existe
+    container.onclick = null; 
 })
 
 initGame()
 
-//bouton pour changer couleur de fond
-
+// --- Bouton Mode Sombre ---
 const bouton = document.getElementById('monBouton');
-
-// 2. On récupère le body
 const body = document.body;
 
-// 3. On ajoute l'écouteur d'événement "click"
-bouton.addEventListener('click', function() {
-    // Bascule la classe 'mode-sombre'
-    body.classList.toggle('couleur2');
-});
+if(bouton){ // Vérifie si le bouton existe pour éviter les erreurs
+    bouton.addEventListener('click', function() {
+        body.classList.toggle('couleur2');
+    });
+}

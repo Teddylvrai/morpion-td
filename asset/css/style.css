@@ -1,6 +1,7 @@
 HTML,body{
-    height: 100%;
+    height: auto;
     width: 100%;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -9,6 +10,12 @@ HTML,body{
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+h1{
+    margin-top: 200px;
 }
 
 .board{

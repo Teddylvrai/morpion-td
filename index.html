@@ -8,9 +8,14 @@
     <script src="asset/js/app.js" defer></script>
 </head>
 <body>
-    <a href="dlc.html">DLC DISPONIBLE DES MAINTENANT</a>
     <div id="container">
         <h1>LE JEUX DU Morpoion</h1>
+        <h2 id="status">C'est au tour de : <span id="currentPlayer">✖️</span></h2>
+
+        <div id="scoreBoard">
+            <p>Score ✖️ : <span id="scoreX">0</span></p>
+            <p>Score ⭕ : <span id="scoreO">0</span></p>
+        </div>
         <h2 id="texte">Qui va gagner ?</h2>
         <div class="board">
             <div class="cell" data-index="0"></div>
